@@ -35,8 +35,10 @@ sub command_for {
     if ($phase eq 'develop') {
         if ($INC{"Module/Install/AuthorRequires.pm"}) {
             return 'author_requires';
+        } elsif ($Module::Install::AUTHOR) {
+            warn "develop phase is ignored unless Module::Install::AuthorRequires is installed.\n";
+            return;
         } else {
-            warn "develop phase is ignored unless Module::Install::AuthorRequires is loaded";
             return;
         }
     }
