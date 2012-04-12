@@ -2,7 +2,7 @@ package Module::Install::CPANfile;
 
 use strict;
 use 5.008_001;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Module::CPANfile;
 use base qw(Module::Install::Base);
