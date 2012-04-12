@@ -18,7 +18,6 @@ cpanfile;
 name 'Dummy';
 all_from 'lib/Dummy.pm';
 tests 't/*.t';
-auto_include;
 WriteAll;
 
 @@ cpanfile

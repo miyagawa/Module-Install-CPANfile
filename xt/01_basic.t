@@ -5,6 +5,11 @@ use xt::Util;
 
 note explain my $meta_data = make_meta_data(*DATA);
 
+subtest build_requires => sub {
+    my $build_requires = $meta_data->{build_requires};
+    is $build_requires->{'Test::More'}, '0.96';
+};
+
 subtest requires => sub {
     my $requires = $meta_data->{requires};
     is $requires->{Plack}, '0.9986';
@@ -28,7 +33,6 @@ cpanfile;
 name 'Dummy';
 all_from 'lib/Dummy.pm';
 tests 't/*.t';
-auto_include;
 WriteAll;
 
 @@ cpanfile
