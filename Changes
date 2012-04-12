@@ -1,4 +1,7 @@
 Revision history for Perl extension Module::Install::CPANfile
 
+0.02  Thu Apr 12 20:25:44 JST 2012
+        - Fix runtime requires
+
 0.01  Thu Apr 12 19:46:19 2012
         - original version

@@ -2,7 +2,7 @@ package Module::Install::CPANfile;
 
 use strict;
 use 5.008_001;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Module::CPANfile;
 use base qw(Module::Install::Base);
@@ -45,6 +45,10 @@ sub command_for {
 
     if ($type eq 'recommends' or $type eq 'suggests') {
         return 'recommends';
+    }
+
+    if ($phase eq 'runtime') {
+        return 'requires';
     }
 
     return "${phase}_requires";
