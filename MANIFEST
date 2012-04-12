@@ -2,8 +2,6 @@
 Changes
 cpanfile
 inc/Module/CPANfile.pm
-inc/Module/CPANfile/Environment.pm
-inc/Module/CPANfile/Result.pm
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/Base.pm
