@@ -17,7 +17,7 @@ DESCRIPTION
     dependencies from cpanfile.
 
     Development requirement can only be checked if the developers has
-    Module::Install::AuthorRequires is installed.
+    installed Module::Install::AuthorRequires.
 
 AUTHOR
     Tatsuhiko Miyagawa <miyagawa@bulknews.net>

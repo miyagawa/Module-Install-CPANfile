@@ -79,7 +79,7 @@ Module::Install::CPANfile is a plugin for Module::Install to include
 dependencies from L<cpanfile>.
 
 Development requirement can only be checked if the developers has
-L<Module::Install::AuthorRequires> is installed.
+installed L<Module::Install::AuthorRequires>.
 
 =head1 AUTHOR
 
