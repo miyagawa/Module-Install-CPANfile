@@ -96,6 +96,44 @@ dependencies from L<cpanfile>.
 Development requirement can only be checked if the developers has
 installed L<Module::Install::AuthorRequires>.
 
+=head1 WHY?
+
+If you have read L<cpanfile> and L<cpanfile-faq> you might wonder why
+this plugin is necessary, since I<cpanfile> is meant to be used by
+Perl applications and not distributions.
+
+Well, for a couple reasons.
+
+=head2 Co-exist as a Github project and CPAN distribution
+
+One particular use case is a script or web application that you
+develop on github, and you start with writing dependencies in
+I<cpanfile>. Other users or developers pull the code from git, use
+L<carton> to bundle dependencies. So far, so good.
+
+One day you decide to release the script or application to CPAN as a
+CPAN distribtuion, and that means you have to duplicate I<cpanfile>
+into I<Makefile.PL> or I<Build.PL>, and that's not DRY! This plugin
+will allow you to have just one I<cpanfile> and reuse it from
+I<Makefile.PL> for CPAN client use.
+
+=head2 CPAN Meta Spec 2.0 support.
+
+The other, kind of unfortunate reason is that as of this writing,
+L<Module::Install> and L<ExtUtils::MakeMaker> don't have a complete
+support for expressing L<CPAN::Meta::Spec> version 2.0
+vocabularies.
+
+There are many of known issues that the metadata you specify with
+L<Module::Install> are somehow discarded or down converted, and
+eventually lost in I<MYMETA> files. The examples of those issues are
+that test dependencies gets merged with build dependencies, and that
+I<recommends> is not saved into MYMETA files.
+
+This plugin lets you write prerequisites in I<cpanfile> which is more
+powerful and has a complete support for L<CPAN::Meta::Spec> 2.0 and
+makes your application forward compatible.
+
 =head1 AUTHOR
 
 Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
