@@ -9,7 +9,7 @@ use base qw(Module::Install::Base);
 
 sub cpanfile {
     my $self = shift;
-    $self->include($_) for qw( Module::CPANfile Module::CPANfile::Environment Module::CPANfile::Result );
+    $self->include("Module::CPANfile");
 
     my $specs = Module::CPANfile->load->prereq_specs;
 
