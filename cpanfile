@@ -1,3 +1,3 @@
-on 'develop' => sub {
-    requires 'Module::CPANfile', '0.9005';
-};
+requires 'Module::Install';
+requires 'Module::CPANfile', '0.9005';
+
