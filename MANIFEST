@@ -21,4 +21,7 @@ MANIFEST			This list of files
 META.yml
 README
 t/00_compile.t
+xt/01_basic.t
+xt/02_author.t
 xt/pod.t
+xt/Util.pm

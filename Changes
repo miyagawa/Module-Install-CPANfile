@@ -1,5 +1,9 @@
 Revision history for Perl extension Module::Install::CPANfile
 
+0.04  Fri Apr 13 18:13:45 CST 2012
+        - Fixed dependencies
+        - Added xt tests (xaicron)
+
 0.03  Thu Apr 12 20:51:21 JST 2012
         - Fix version range to a minimum version requirement so that Module::Install can understand (xaicron)
 
