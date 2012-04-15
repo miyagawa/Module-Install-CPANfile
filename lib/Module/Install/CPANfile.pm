@@ -85,7 +85,7 @@ Module::Install::CPANfile - Include cpanfile
   };
 
   # Makefile.PL
-  use Module::Install;
+  use inc::Module::Install;
   cpanfile;
 
 =head1 DESCRIPTION
