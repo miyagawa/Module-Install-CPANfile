@@ -9,8 +9,10 @@ SYNOPSIS
       };
 
       # Makefile.PL
-      use Module::Install;
-      cpanfile;
+      use inc::Module::Install;
+      cpanfile;            # For build_requires etc. compatiblity
+      WriteAll;
+      merge_meta_cpanfile; # Merge META files with cpanfile prereqs
 
 DESCRIPTION
     Module::Install::CPANfile is a plugin for Module::Install to include

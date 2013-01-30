@@ -8,3 +8,4 @@ auto_set_repository();
 auto_provides;
 cpanfile;
 WriteAll;
+merge_meta_cpanfile;

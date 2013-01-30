@@ -7,9 +7,29 @@ our $VERSION = '0.04';
 use Module::CPANfile;
 use base qw(Module::Install::Base);
 
+# TODO somehow hijack WriteAll instead of a separate call?
+sub merge_meta_cpanfile {
+    my $self = shift;
+
+    my $specs = Module::CPANfile->load->prereq_specs;
+
+    for my $metafile (grep -e, qw(META.yml META.json MYMETA.yml MYMETA.json)) {
+        print "Merging cpanfile prereqs to $metafile\n";
+        my $meta = CPAN::Meta->load_file($metafile);
+        my $prereqs = CPAN::Meta::Prereqs->new($specs)->with_merged_prereqs($meta->effective_prereqs);
+        my $struct = $meta->as_struct;
+        $struct->{prereqs} = $prereqs->as_string_hash;
+
+        my $meta_version = $metafile =~ /\.yml$/ ? '1.4' : '2';
+        CPAN::Meta->new($struct)->save($metafile, { version => $meta_version });
+    }
+}
+
 sub cpanfile {
     my $self = shift;
     $self->include("Module::CPANfile");
+
+    $self->configure_requires("CPAN::Meta");
 
     my $specs = Module::CPANfile->load->prereq_specs;
 
@@ -86,7 +106,9 @@ Module::Install::CPANfile - Include cpanfile
 
   # Makefile.PL
   use inc::Module::Install;
-  cpanfile;
+  cpanfile;            # For build_requires etc. compatiblity
+  WriteAll;
+  merge_meta_cpanfile; # Merge META files with cpanfile prereqs
 
 =head1 DESCRIPTION
 
