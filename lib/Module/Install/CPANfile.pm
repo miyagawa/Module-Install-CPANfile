@@ -50,7 +50,8 @@ sub cpanfile {
     if ($self->is_admin) {
         if (eval { require CPAN::Meta::Check; 1 }) {
             my $prereqs = Module::CPANfile->load->prereqs;
-            for (CPAN::Meta::Check::verify_dependencies($prereqs, [qw/runtime build test develop/], 'requires')) {
+            my @err = CPAN::Meta::Check::verify_dependencies($prereqs, [qw/runtime build test develop/], 'requires');
+            for (@err) {
                 warn "Warning: $_\n";
             }
         } else {

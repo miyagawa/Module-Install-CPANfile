@@ -2,10 +2,14 @@ use strict;
 use warnings;
 use Test::More;
 use xt::Util;
-use Test::Requires 'Module::Install::AuthorRequires';
+use Test::Requires 'CPAN::Meta::Check';
 
-eval { make_meta_data(*DATA) };
-like $@, qr/\QCan't find author dependency Dummmmmmmmmmmmmmmmmy\E/;
+my $warning;
+{
+    local $SIG{__WARN__} = sub { $warning .= $_[0] };
+    make_meta_data(*DATA);
+}
+like $warning, qr/'XYZDummy' is not installed/;
 
 done_testing;
 
@@ -22,7 +26,7 @@ WriteAll;
 
 @@ cpanfile
 on 'develop' => sub {
-    requires 'Dummmmmmmmmmmmmmmmmy';
+    requires 'XYZDummy';
 };
 
 @@ lib/Dummy.pm

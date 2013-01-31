@@ -7,7 +7,7 @@ note explain my $meta_data = make_meta_data(*DATA);
 
 subtest build_requires => sub {
     my $build_requires = $meta_data->{build_requires};
-    is $build_requires->{'Test::More'}, '0.96';
+    is $build_requires->{'Test::More'}, '>= 0.96, < 2.0';
 };
 
 subtest requires => sub {
@@ -41,9 +41,12 @@ requires 'SQL::Maker';
 
 recommends 'JSON::XS', '2.0';
 
+on 'runtime' => sub {
+    recommends 'Test::TCP', '1.12';
+};
+
 on 'test' => sub {
     requires 'Test::More', '>= 0.96, < 2.0';
-    recommends 'Test::TCP', '1.12';
 };
 
 @@ lib/Dummy.pm

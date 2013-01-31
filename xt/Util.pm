@@ -44,8 +44,10 @@ sub make_meta_data {
 sub build {
     my $distdir = shift;
     die "Makefile.PL not found" unless -f 'Makefile.PL';
+    my $output = run_cmd(qq{$^X Makefile.PL});
     my $tb = Test::Builder->new;
-    $tb->note( run_cmd(qq{$^X Makefile.PL}) );
+    $tb->note($output);
+    warn $output if $output =~ /warning/i;
     run_make();
 }
 
