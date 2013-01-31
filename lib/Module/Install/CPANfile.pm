@@ -19,7 +19,6 @@ sub merge_meta_with_cpanfile {
     push @metafiles, qw(META.yml META.json) if $self->is_admin;
 
     for my $metafile (grep -e, @metafiles) {
-        system "cp $metafile $metafile.orig";
         print "Merging cpanfile prereqs to $metafile\n";
         my $meta = CPAN::Meta->load_file($metafile);
         my $prereqs_hash = $prereqs->with_merged_prereqs($meta->effective_prereqs)->as_string_hash;
