@@ -15,17 +15,27 @@ sub merge_meta_with_cpanfile {
 
     my $prereqs = Module::CPANfile->load->prereqs;
 
-    my @metafiles = qw(MYMETA.yml MYMETA.json);
-    push @metafiles, qw(META.yml META.json) if $self->is_admin;
+    if ($self->is_admin) {
+        print "Regenerate META.json and META.yml using cpanfile\n";
+        my $meta = CPAN::Meta->load_yaml_string($self->admin->dump_meta);
+        _merge_prereqs($meta, $prereqs)->save('META.yml', { version => '1.4' });
+        _merge_prereqs($meta, $prereqs)->save('META.json', { version => '2' });
+    }
 
-    for my $metafile (grep -e, @metafiles) {
+    for my $metafile (grep -e, qw(MYMETA.yml MYMETA.json)) {
         print "Merging cpanfile prereqs to $metafile\n";
         my $meta = CPAN::Meta->load_file($metafile);
-        my $prereqs_hash = $prereqs->with_merged_prereqs($meta->effective_prereqs)->as_string_hash;
-        my $struct = { %{$meta->as_struct}, prereqs => $prereqs_hash };
         my $meta_version = $metafile =~ /\.yml$/ ? '1.4' : '2';
-        CPAN::Meta->new($struct)->save($metafile, { version => $meta_version });
+        _merge_prereqs($meta, $prereqs)->save($metafile, { version => $meta_version });
     }
+}
+
+sub _merge_prereqs {
+    my($meta, $prereqs) = @_;
+
+    my $prereqs_hash = $prereqs->with_merged_prereqs($meta->effective_prereqs)->as_string_hash;
+    my $struct = { %{$meta->as_struct}, prereqs => $prereqs_hash };
+    CPAN::Meta->new($struct);
 }
 
 sub cpanfile {
