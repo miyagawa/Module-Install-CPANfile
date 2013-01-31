@@ -1,5 +1,5 @@
 requires 'Module::Install';
-requires 'Module::CPANfile', '0.9005';
+requires 'Module::CPANfile', '0.9008';
 
 on test => sub {
     requires 'Test::More', '0.90';
