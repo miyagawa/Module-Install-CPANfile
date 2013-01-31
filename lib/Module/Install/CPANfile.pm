@@ -8,12 +8,18 @@ use Module::CPANfile;
 use base qw(Module::Install::Base);
 
 # TODO somehow hijack WriteAll instead of a separate call?
+# TODO Maybe we better move the core logic to Module::CPANfile
 sub merge_meta_cpanfile {
     my $self = shift;
 
+    require CPAN::Meta;
+
     my $specs = Module::CPANfile->load->prereq_specs;
 
-    for my $metafile (grep -e, qw(META.yml META.json MYMETA.yml MYMETA.json)) {
+    my @metafiles = qw(MYMETA.yml MYMETA.json);
+    push @metafiles, qw(META.yml META.json) if $self->is_admin;
+
+    for my $metafile (grep -e, @metafiles) {
         print "Merging cpanfile prereqs to $metafile\n";
         my $meta = CPAN::Meta->load_file($metafile);
         my $prereqs = CPAN::Meta::Prereqs->new($specs)->with_merged_prereqs($meta->effective_prereqs);
