@@ -39,10 +39,12 @@ sub _merge_prereqs {
 }
 
 sub cpanfile {
-    my $self = shift;
+    my($self, %options) = @_;
 
     $self->include("Module::CPANfile");
     $self->configure_requires("CPAN::Meta");
+
+    $self->dynamic_config(0) unless $options{dynamic};
 
     my $write_all = \&::WriteAll;
 
