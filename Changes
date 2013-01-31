@@ -1,5 +1,10 @@
 Revision history for Perl extension Module::Install::CPANfile
 
+0.10  Wed Jan 30 19:48:04 PST 2013
+        - Major update to cpanfile command: now it actually updates MYMETA
+          files upon installation, bypassing M::I and EUMM conversion
+        - Checks all requirements in author mode using CPAN::Meta::Check
+
 0.04  Fri Apr 13 18:13:45 CST 2012
         - Fixed dependencies
         - Added xt tests (xaicron)
