@@ -32,9 +32,6 @@ sub merge_meta_with_cpanfile {
 sub cpanfile {
     my($self, %options) = @_;
 
-    $self->include("Module::CPANfile");
-    $self->configure_requires("CPAN::Meta");
-
     $self->dynamic_config(0) unless $options{dynamic};
 
     my $write_all = \&::WriteAll;
