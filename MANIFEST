@@ -2,12 +2,13 @@
 Changes
 cpanfile
 inc/Module/CPANfile.pm
+inc/Module/CPANfile/Environment.pm
+inc/Module/CPANfile/Result.pm
 inc/Module/Install.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
 inc/Module/Install/CPANfile.pm
 inc/Module/Install/Fetch.pm
-inc/Module/Install/Include.pm
 inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
 inc/Module/Install/ReadmeFromPod.pm
